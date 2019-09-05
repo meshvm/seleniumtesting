@@ -1,0 +1,84 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import time
+
+d = DesiredCapabilities.CHROME
+d['loggingPrefs'] = { 'browser':'ALL' }
+driver = webdriver.Chrome("./chromedriver_/chromedriver", desired_capabilities=d)
+def LoginAndPost():
+    driver.get("https://www.atg.party")
+    flag = False
+    for entry in driver.get_log('browser'):
+        if entry["level"] == "SEVERE":
+            flag = True
+            print("some resources are unloaded", entry["message"])
+        if entry["level"] == "WARNING":
+            flag = True
+            print("java script DOM Error",entry["message"])
+    # uncomment next line to run full testcase
+    # flag = False
+    if not flag:
+        login_link = driver.find_element_by_link_text('Login')
+        login_link.send_keys(Keys.RETURN)
+        time.sleep(2)
+        email = driver.find_element_by_id("email")
+        email.send_keys("hello@atg.world")
+        paswrd = driver.find_element_by_id("password")
+        paswrd.send_keys("Pass@123")
+        signin = driver.find_element_by_css_selector("button.log-btn")
+        signin.click()
+        time.sleep(3)
+        dropdown_click = driver.find_element_by_id("dropdownMenuButton")
+        dropdown_click.click()
+        article = driver.find_element_by_link_text('Article')
+        article.click()
+        title = driver.find_element_by_id("title")
+        title.click()
+        title.send_keys("this is test post")
+        desc = driver.find_element_by_css_selector("div.fr-element")
+        desc.click()
+        desc.send_keys("this is test post body")
+        post_btn = driver.find_element_by_id("featurebutton")
+        post_btn.click()
+        driver.close()
+    else:
+        print("found Errors")
+        print("Exiting testing Test case Failed")
+        # time.sleep(1000)
+        driver.close()
+
+
+def Login():
+    driver.get("https://www.atg.party")
+    flag = False
+    for entry in driver.get_log('browser'):
+        if entry["level"] == "SEVERE":
+            flag = True
+            print("some resources are unloaded", entry["message"])
+        if entry["level"] == "WARNING":
+            flag = True
+            print("java script DOM Error",entry["message"])
+    # uncomment next line to run full testcase
+    # flag = False
+    if not flag:
+        login_link = driver.find_element_by_link_text('Login')
+        login_link.send_keys(Keys.RETURN)
+        time.sleep(2)
+        email = driver.find_element_by_id("email")
+        email.send_keys("hello@atg.world")
+        paswrd = driver.find_element_by_id("password")
+        paswrd.send_keys("Pass@123")
+        signin = driver.find_element_by_css_selector("button.log-btn")
+        signin.click()
+        driver.close()
+    else:
+        print("found Errors")
+        print("Exiting testing Test case Failed")
+        # time.sleep(1000)
+        driver.close()
+if __name__ == '__main__':
+    #uncomment this for only Login
+    # Login()
+    # Login and Post Data
+    LoginAndPost()
