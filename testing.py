@@ -1,12 +1,21 @@
+#browser
 from selenium import webdriver
+# keys 
 from selenium.webdriver.common.keys import Keys
+# browser logs
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import Options
 import time
+import os
+path = str(os.getcwd()) + "/chromedriver_/chromedriver"
 
-d = DesiredCapabilities.CHROME
-d['loggingPrefs'] = { 'browser':'ALL' }
-driver = webdriver.Chrome("./chromedriver_/chromedriver", desired_capabilities=d)
+chrome_options = Options()  
+chrome_options.add_argument("--headless")
+
 def LoginAndPost():
+    d = DesiredCapabilities.CHROME
+    d['loggingPrefs'] = { 'browser':'ALL' }
+    driver = webdriver.Chrome(path,chrome_options=chrome_options, desired_capabilities=d)
     driver.get("https://www.atg.party")
     flag = False
     for entry in driver.get_log('browser'):
@@ -17,7 +26,7 @@ def LoginAndPost():
             flag = True
             print("java script DOM Error",entry["message"])
     # uncomment next line to run full testcase
-    # flag = False
+    flag = False
     if not flag:
         login_link = driver.find_element_by_link_text('Login')
         login_link.send_keys(Keys.RETURN)
@@ -41,6 +50,7 @@ def LoginAndPost():
         desc.send_keys("this is test post body")
         post_btn = driver.find_element_by_id("featurebutton")
         post_btn.click()
+        time.sleep(3)
         driver.close()
     else:
         print("found Errors")
@@ -50,6 +60,9 @@ def LoginAndPost():
 
 
 def Login():
+    d = DesiredCapabilities.CHROME
+    d['loggingPrefs'] = { 'browser':'ALL' }
+    driver = webdriver.Chrome(path, chrome_options=chrome_options, desired_capabilities=d)
     driver.get("https://www.atg.party")
     flag = False
     for entry in driver.get_log('browser'):
@@ -59,8 +72,8 @@ def Login():
         if entry["level"] == "WARNING":
             flag = True
             print("java script DOM Error",entry["message"])
-    # uncomment next line to run full testcase
-    # flag = False
+    # uncomment next line to run full testcase 
+    flag = False
     if not flag:
         login_link = driver.find_element_by_link_text('Login')
         login_link.send_keys(Keys.RETURN)
@@ -71,10 +84,11 @@ def Login():
         paswrd.send_keys("Pass@123")
         signin = driver.find_element_by_css_selector("button.log-btn")
         signin.click()
+        time.sleep(2)
         driver.close()
     else:
         print("found Errors")
-        print("Exiting testing Test case Failed")
+        print("Exiting test ,Testcase Failed")
         # time.sleep(1000)
         driver.close()
 if __name__ == '__main__':
