@@ -15,7 +15,7 @@ chrome_options.add_argument("--headless")
 def LoginAndPost():
     d = DesiredCapabilities.CHROME
     d['loggingPrefs'] = { 'browser':'ALL' }
-    driver = webdriver.Chrome(path,chrome_options=chrome_options, desired_capabilities=d)
+    driver = webdriver.Chrome(path,options=chrome_options, desired_capabilities=d)
     driver.get("https://www.atg.party")
     flag = False
     for entry in driver.get_log('browser'):
@@ -62,7 +62,7 @@ def LoginAndPost():
 def Login():
     d = DesiredCapabilities.CHROME
     d['loggingPrefs'] = { 'browser':'ALL' }
-    driver = webdriver.Chrome(path, chrome_options=chrome_options, desired_capabilities=d)
+    driver = webdriver.Chrome(path, options=chrome_options, desired_capabilities=d)
     driver.get("https://www.atg.party")
     flag = False
     for entry in driver.get_log('browser'):
