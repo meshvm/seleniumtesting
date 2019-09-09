@@ -40,8 +40,11 @@ def LoginAndPost():
         time.sleep(3)
         dropdown_click = driver.find_element_by_id("arrow")
         dropdown_click.click()
-        article = driver.find_element_by_link_text('Article')
-        article.click()
+        # article = driver.find_element_by_xpath("//div[id= 'collapse1']/ul[contains(@class, 'list-group')]/li")
+        # # button[text()="Some text"]
+        # print(article)
+        # article.click()
+        driver.get("https://www.atg.party/article")
         time.sleep(3)
         title = driver.find_element_by_id("title")
         title.click()
