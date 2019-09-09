@@ -93,6 +93,6 @@ def Login():
         driver.close()
 if __name__ == '__main__':
     #uncomment this for only Login
-    # Login()
+    Login()
     # Login and Post Data
-    LoginAndPost()
+    #LoginAndPost()
