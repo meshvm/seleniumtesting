@@ -38,10 +38,11 @@ def LoginAndPost():
         signin = driver.find_element_by_css_selector("button.log-btn")
         signin.click()
         time.sleep(3)
-        dropdown_click = driver.find_element_by_id("dropdownMenuButton")
+        dropdown_click = driver.find_element_by_id("arrow")
         dropdown_click.click()
         article = driver.find_element_by_link_text('Article')
         article.click()
+        time.sleep(3)
         title = driver.find_element_by_id("title")
         title.click()
         title.send_keys("this is test post")
@@ -93,6 +94,6 @@ def Login():
         driver.close()
 if __name__ == '__main__':
     #uncomment this for only Login
-    Login()
+    #Login()
     # Login and Post Data
-    #LoginAndPost()
+    LoginAndPost()
