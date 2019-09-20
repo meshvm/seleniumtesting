@@ -1,0 +1,60 @@
+'''
+many changes have had to be made to run in ur sys
+beware of login and passwords
+
+'''
+from selenium import webdriver
+#adding urllib
+from urllib.request import urlretrieve
+from urllib.parse import quote
+#from selenium.webdriver.common.keys import Keys
+# browser logs
+#from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+#from selenium.webdriver.chrome.options import Options
+import time
+import os
+#path = str(os.getcwd()) + "/chromedriver_/chromedriver"
+#chrome_options = Options()  
+#chrome_options.add_argument("headless")
+
+#d = DesiredCapabilities.CHROME
+# driver = webdriver.Chrome(path)
+def fb_login():
+    path = str(os.getcwd()) + "/seleniumtesting/chromedriver_/chromedriver"
+    driver = webdriver.Chrome(path)
+    driver.get("https://www.facebook.com")
+    email = driver.find_element_by_id("email")
+    email.send_keys("123465968@abcd.com")
+    time.sleep(3)
+    paswrd = driver.find_element_by_id("pass")
+    paswrd.send_keys("XYZ")
+    time.sleep(3)
+    qstr = quote("bars in bangalore")
+    time.sleep(5)
+
+    #print(qstr)
+    driver.get("https://www.facebook.com/?q=" + qstr + "&epa=SEARCH_BOX")
+    # # login_button = driver.find_element_by_id("loginbutton")
+    # # login_button.click()
+    # time.sleep(5)
+'''def facebookgrp_link():
+    path = str(os.getcwd()) + "/seleniumtesting/chromedriver_/chromedriver"
+    driver = webdriver.Chrome(path)
+    qstr = quote("bars in bangalore")
+    time.sleep(5)
+
+    print(qstr)
+    driver.get("https://www.facebook.com/?q=" + qstr + "&epa=SEARCH_BOX")
+    #thing = urlretrieve("https://www.facebook.com/?q=" + qstr + "&epa=SEARCH_BOX")
+    #print(thing)
+    # facebookgrp_link()
+    #elector("button.log-btn")
+    #signin.click()
+    time.sleep(3)
+
+    #dropdown_click.click()
+    #driver.close()
+    '''
+if __name__ == '__main__':
+    fb_login()
+    #facebookgrp_link()
